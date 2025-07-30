@@ -1,0 +1,47 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug in DOSBox",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/usr/bin/dosbox",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-c",
+                "SET PATH=%PATH%X:\\BINW", // add debug tools location from Open Watcom 1.9 to PATH
+                "-c",
+                "mount x /opt/open-watcom-1.9", // mount the workspace folder containing the Watcom 1.9 debug tools
+                "-c",
+                "mount y ${workspaceFolder}", // mount the workspace folder containing the exe to debug
+                "-c",
+                "y:", // switch to workspace directory
+                "-c",
+                "wd main.exe", // run the debugger
+                // "-c",
+                // "exit"
+            ],
+            "stopAtEntry": false,
+            "preLaunchTask": "Build with Open Watcom"
+        },
+        {
+            "name": "Run in DOSBox",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/usr/bin/dosbox",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-c",
+                "mount y ${workspaceFolder}", // mount the workspace folder containing the exe
+                "-c",
+                "y:", // switch to workspace directory
+                "-c",
+                "main.exe", // run the application
+                // "-c",
+                // "exit"
+            ],
+            "stopAtEntry": false,
+            "preLaunchTask": "Build with Open Watcom"
+        }
+    ]
+}
